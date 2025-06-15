@@ -1,52 +1,47 @@
-# Traffic Data Analysis Pipeline - README
 
-## Folder Structure Overview
+# Advanced Data Science Techniques for Spatio-Temporal Analysis of Urban Traffic Patterns
+## Project Overview
 
-```
-C:.
-├───Part 1
-│ 1.preprocessing_here_data_pca.py
-│ 2.Transform.R
-│ 3.Merge.R
-│ 4.PCA.R
-│
-├───Part 2
-│ .Rhistory
-│ 1.create_raster_for_qgis.py
-│ 2.Georeferenced_qgis.qgz
-│ 3.read_raster_and_interpolation.py
-│ 4.Map.R
-│
-└───Part 3
-1.preprocessing_analyzing.py
-2.Create_Here_dataset_with_clusters.R
-3.Analyzing_traffic_data.R
-4.GWR.R
-```
+This project investigates urban traffic patterns using floating vehicle data sourced from HERE Technologies. Leveraging advanced data science methods such as Principal Component Analysis (PCA) and clustering, it aims to uncover meaningful patterns in traffic speed and volume across major cities. The study integrates spatial and temporal dimensions to enhance traditional traffic analysis approaches, ultimately contributing to better urban mobility management.
 
-## Project Description and Workflow
+## Context and Motivation
 
-This project implements a comprehensive analytical pipeline to process and analyze large-scale traffic data across multiple cities. The workflow is modular and structured into three main parts, each targeting a specific phase of data preparation, analysis, and spatial integration.
+Urban mobility faces increasing pressure due to population growth and rising vehicle ownership. Effective traffic management is crucial not only to alleviate congestion and reduce travel times but also to minimize environmental impacts and improve overall urban quality of life.
 
-### Part 1: Data Preprocessing and Dimensionality Reduction
+Conventional traffic data sources, such as fixed sensors and cameras, often provide limited spatial coverage and fail to capture complex city-wide mobility patterns. The rise of GPS-equipped vehicles has enabled the collection of floating car data (FCD), offering high-resolution, grid-based traffic information across cities. This data empowers more comprehensive analysis of traffic dynamics in space and time.
 
-- Scripts in this section handle the initial preprocessing of HERE traffic data.
-- They perform temporal aggregation and transformation to prepare the data for analysis.
-- A key step here is the application of Principal Component Analysis (PCA) for dimensionality reduction, enabling extraction of the main traffic patterns.
-- The PCA-based clustering results form the basis for subsequent analysis.
-- This module is consistently applied across all three cities studied: Antwerp, Berlin, and Barcelona, ensuring comparability of traffic dynamics analysis.
+Alongside, advances in Big Data analytics, machine learning, and IoT technologies enable the processing of vast and heterogeneous datasets. This project capitalizes on these advances to explore spatio-temporal traffic patterns more deeply than traditional descriptive analyses allow.
 
-### Part 2: Spatial Data Preparation and Integration (Barcelona-Specific)
+## Data Description
 
-- This part focuses on creating spatial raster layers compatible with QGIS, georeferencing them properly, and performing spatial interpolation.
-- It includes merging traffic data with spatial layers using the `codi_emo` administrative zoning system available only for Barcelona.
-- Due to richer spatial data availability for Barcelona, this module enables spatial enrichment of traffic data, linking traffic patterns with land use and administrative boundaries.
-- The QGIS project file and raster processing scripts support visualization and geospatial operations.
+The core dataset comprises floating vehicle data collected at five-minute intervals from ten major global cities between 2019 and 2021. Unlike typical road segment-based data, this dataset is structured on a regular geographic grid dividing the urban environment into cells. Each cell records vehicle speed and volume in four diagonal directions (NW, NE, SW, SE), facilitating high-resolution spatial and temporal analyses independent of road network constraints.
 
-### Part 3: Advanced Analysis and Spatial Modeling (Barcelona-Specific)
+For the Barcelona metropolitan area, additional spatial datasets—including administrative boundaries, socioeconomic indicators, land use variables, and points of interest—are incorporated to enrich the analysis and explore correlations with traffic patterns.
 
-- Here the enriched dataset is further analyzed through clustering, detailed profiling, and spatial statistical modeling.
-- Scripts include creating clustered datasets, in-depth traffic data analysis, and geographically weighted regression (GWR) to explore spatial heterogeneity.
-- These analyses incorporate socioeconomic and land use context unique to Barcelona, providing deeper insights into spatial mobility patterns.
-- This spatial enrichment and modeling step was not feasible for Antwerp and Berlin due to the lack of equivalent detailed spatial data.
+## Research Objectives
 
+This project addresses several key objectives:
+
+- To explore and preprocess large-scale floating vehicle data from HERE Technologies.
+
+- To apply multivariate statistical methods (PCA, clustering, cluster profiling) to identify dominant traffic patterns in speed and volume.
+
+- To integrate spatial indicators for enriched analysis within the Barcelona metropolitan area.
+
+- To analyze temporal variability and detect congestion trends across multiple time scales (hourly, daily, seasonal).
+
+- To assess the utility of HERE data for advancing transport modeling and understanding urban travel behavior.
+
+## Research Questions
+
+Key questions guiding the study include:
+
+- What are the primary temporal and spatial traffic patterns observable in major urban areas using HERE floating vehicle data?
+
+- How effectively can clustering techniques uncover recurring congestion patterns or anomalous traffic behaviors?
+
+- How can this grid-based traffic data be transformed to support and complement existing traffic engineering practices?
+
+## Methodology
+
+The analysis combines Python and R programming environments, employing libraries for data preprocessing, statistical modeling, and spatial visualization. The methodology integrates time series analysis, dimensionality reduction, clustering, and spatial data enrichment to deliver a comprehensive view of urban traffic dynamics.
