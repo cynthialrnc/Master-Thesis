@@ -27,7 +27,7 @@ library(NbClust)
 library(cluster)
 
 # Load HERE traffic dataset
-file_path <- "C:/Users/HP/Documents/Uni/Spring/Data/matrix/BARCELONA/BARCELONA_traffic_dataframe_preparation.parquet"
+file_path <- "C:/Users/HP/Documents/Uni/Spring/Data/matrix/BARCELONA/BARCELONA_traffic_dataframe.parquet"
 df_here <- read_parquet(file_path)
 
 # Define holidays in Barcelona

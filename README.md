@@ -12,36 +12,117 @@ Conventional traffic data sources, such as fixed sensors and cameras, often prov
 
 Alongside, advances in Big Data analytics, machine learning, and IoT technologies enable the processing of vast and heterogeneous datasets. This project capitalizes on these advances to explore spatio-temporal traffic patterns more deeply than traditional descriptive analyses allow.
 
-## Data Description
+## About this repository
+
+This is a github repo to share code for the Master Thesis paper.
+
+## Data
 
 The core dataset comprises floating vehicle data collected at five-minute intervals from ten major global cities between 2019 and 2021. Unlike typical road segment-based data, this dataset is structured on a regular geographic grid dividing the urban environment into cells. Each cell records vehicle speed and volume in four diagonal directions (NW, NE, SW, SE), facilitating high-resolution spatial and temporal analyses independent of road network constraints.
 
 For the Barcelona metropolitan area, additional spatial datasets—including administrative boundaries, socioeconomic indicators, land use variables, and points of interest—are incorporated to enrich the analysis and explore correlations with traffic patterns.
 
-## Research Objectives
+## Get the Data
 
-This project addresses several key objectives:
+You can obtain the traffic data used in this project from [HERE Technologies](https://developer.here.com/sample-data), available for academic and non-commercial purposes.
 
-- To explore and preprocess large-scale floating vehicle data from HERE Technologies.
+**Only download the data for the cities of Berlin, Barcelona, and Antwerp for the year 2021.**
 
-- To apply multivariate statistical methods (PCA, clustering, cluster profiling) to identify dominant traffic patterns in speed and volume.
+Once downloaded, place the files in the `movie/` directory at the root of this repository.
 
-- To integrate spatial indicators for enriched analysis within the Barcelona metropolitan area.
+**Warning:** These files are large and may exceed several tens of gigabytes. Ensure you have sufficient disk space and a stable internet connection.
 
-- To analyze temporal variability and detect congestion trends across multiple time scales (hourly, daily, seasonal).
+**Note:** The data for **Barcelona metropolitan area** (shapfile and land use variables dataset) is already included in this repository under the folder named `02-BCN DATA/`.
 
-- To assess the utility of HERE data for advancing transport modeling and understanding urban travel behavior.
+## Data pipeline
 
-## Research Questions
+The following diagram gives an overview:
+<img src="./Data Pipeline.png">
 
-Key questions guiding the study include:
+## Setup
 
-- What are the primary temporal and spatial traffic patterns observable in major urban areas using HERE floating vehicle data?
+This project integrates **Python**, **R**, and **QGIS** for data processing, analysis, and visualization. Below are setup instructions and dependencies by environment.
 
-- How effectively can clustering techniques uncover recurring congestion patterns or anomalous traffic behaviors?
+### Python
 
-- How can this grid-based traffic data be transformed to support and complement existing traffic engineering practices?
+Python is used for raw data preprocessing, especially handling HDF5 traffic data.
 
-## Methodology
+#### Key Libraries:
 
-The analysis combines Python and R programming environments, employing libraries for data preprocessing, statistical modeling, and spatial visualization. The methodology integrates time series analysis, dimensionality reduction, clustering, and spatial data enrichment to deliver a comprehensive view of urban traffic dynamics.
+* `h5py`: Efficient access to large `.h5` traffic datasets.
+* `numpy`, `pandas`: Data wrangling and aggregation (e.g., hourly average speed and volume per direction).
+* `pyarrow`: Export processed data as `.parquet` for compatibility with R.
+* `os`, `pathlib`, `re`: File system navigation and filename parsing.
+* `rasterio`, `pyproj`: Spatial alignment of traffic data with shapefiles (affine transforms, CRS conversion).
+
+#### Setup:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Your `requirements.txt` should include:
+
+```text
+h5py
+numpy
+pandas
+pyarrow
+rasterio
+pyproj
+```
+
+### R
+
+R is used for statistical analysis, clustering, visualization, and spatial mapping.
+
+#### Key Packages:
+
+**Data Manipulation**
+
+* `dplyr`, `tidyr`, `tibble`, `data.table`
+
+**Visualization**
+
+* `ggplot2`, `viridis`, `tmap`, `fmsb`
+
+**Statistical Analysis & Clustering**
+
+* `stats`, `FSA`, `FactoMineR`, `factoextra`, `NbClust`, `cluster`, `matrixStats`, `MASS`, `car`, `chemometrics`
+
+**Spatial Data**
+
+* `sf`, `sp`, `spgwr`, `tmap`
+
+**Utilities**
+
+* `arrow`, `lubridate`, `stringr`, `readxl`, `Hmisc`, `scales`, `forcats`
+
+#### Setup:
+
+Install packages via R or RStudio:
+
+```r
+install.packages(c(
+  "dplyr", "tidyr", "tibble", "data.table",
+  "ggplot2", "viridis", "tmap", "fmsb",
+  "stats", "FSA", "FactoMineR", "factoextra", "NbClust", "cluster", 
+  "matrixStats", "MASS", "car", "chemometrics",
+  "sf", "sp", "spgwr",
+  "arrow", "lubridate", "stringr", "readxl", "Hmisc", "scales", "forcats"
+))
+```
+
+### QGIS
+
+QGIS is used for advanced geospatial analysis and visualization.
+
+#### Requirements:
+
+* [QGIS 3.28+](https://qgis.org/en/site/forusers/download.html)
+* Ensure the **Processing** plugin is enabled.
+* Compatible with GeoPackage, Shapefile, and GeoJSON layers used in this project.
+
+

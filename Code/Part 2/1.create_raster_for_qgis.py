@@ -63,7 +63,7 @@ transform = Affine(
 )
 
 # Define output file path
-output_tif = "C:/Users/HP/Documents/Uni/Spring/Data/Map/BARCELONA/output_raster_25831_new_affine_08_04_2025.tif"
+output_tif = "C:/Users/HP/Documents/Uni/Spring/Data/Map/BARCELONA/output_raster_25831.tif"
 
 # Save the extracted grid as a GeoTIFF with georeferencing
 with rasterio.open(

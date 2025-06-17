@@ -5,7 +5,7 @@ import numpy as np
 import rasterio
 
 # Load the raster and get its affine transformation
-with rasterio.open("C:/Users/HP/Documents/Uni/Spring/Data/Map/BARCELONA/output_raster_25831_full_georef.tif") as src:
+with rasterio.open("C:/Users/HP/Documents/Uni/Spring/Data/Map/BARCELONA/output_raster_25831_georef.tif") as src:
     transform = src.transform 
 
 # Dimensions after georeferencing and before (original)
@@ -55,13 +55,7 @@ print("Reconstructed 2D grid shape:", grid_original.shape)
 df_original = pd.DataFrame(grid_original)
 print("Example cell value [100, 0]:", df_original.iloc[100, 0])
 
-# Save original grid to CSV
-df_original.to_csv("C:/Users/HP/Documents/Uni/Spring/Data/Map/BARCELONA/codi_emo_grid_full.csv", index=False, header=False)
-
 grid_original = df_original.values
-
-# Save again without headers/index (redundant, can be removed)
-df_original.to_csv("C:/Users/HP/Documents/Uni/Spring/Data/Map/BARCELONA/codi_emo_grid_full.csv", index=False, header=False)
 
 # Create a copy for interpolation
 grid_interpolated = grid_original.copy()
