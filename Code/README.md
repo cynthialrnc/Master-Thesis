@@ -11,17 +11,17 @@ C:.
 │ 4.PCA.R
 │
 ├───Part 2
-│ .Rhistory
 │ 1.create_raster_for_qgis.py
 │ 2.Georeferenced_qgis.qgz
 │ 3.read_raster_and_interpolation.py
 │ 4.Map.R
 │
 └───Part 3
-1.preprocessing_analyzing.py
-2.Create_Here_dataset_with_clusters.R
-3.Analyzing_traffic_data.R
-4.GWR.R
+│ 1.preprocessing_analyzing.py
+│ 2.Create_Here_dataset_with_clusters.R
+│ 3.Analyzing_traffic_data.R
+│ 4.GWR.R
+└───
 ```
 
 ## Project Description and Workflow
